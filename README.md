@@ -56,9 +56,9 @@ Para instalar essas belezinhas basta digitar no terminal dentro de cada pasta o 
 
 ### Pontos a se considerar
 
-Primeiro de tudo você precisa entender que ambas aplicações rodam em portas diferentes, a do client (ReactJs) por padrão roda na porta `:3000` e a do server foi escolhida manualmente para a porta `:6969`
+Primeiro de tudo você precisa entender que ambas aplicações rodam em portas diferentes, a do client (ReactJs) por padrão roda na porta `:3000` e a do server foi escolhida manualmente para a porta `:6969`.
 
-Para rodar o projeto você precisará de alguns scripts que estão no arquivo `package.json`
+Para rodar o projeto você precisará de alguns scripts que estão no arquivo `package.json`.
 
 ``` json
 client ->
@@ -78,6 +78,10 @@ server ->
   }
 
 ```
+
+No próprio VScode, basta abrir dois terminais em paralelo e digitar o script `npm start` em cada pasta, rodando assim as aplicações.
+
+![github](https://github.com/LuanGrod/pet-shop/blob/main/assets/ss3.JPG)
 
 ### ~Por enquanto é isso, conforme a gente for fazendo isso vamos atualizando esse README.md~
 

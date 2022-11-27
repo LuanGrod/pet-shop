@@ -1,10 +1,16 @@
+import { BrowserRouter } from 'react-router-dom';
+
+import Menu from './router/layouts/Menu';
+import Content from './router/layouts/Content';
 
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
+      <Menu />
+      <Content />
+    </BrowserRouter>
 
-    </div>
   );
 }
 

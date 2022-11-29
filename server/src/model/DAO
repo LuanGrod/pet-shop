@@ -1,0 +1,109 @@
+const fs = require('fs');
+
+const dir = (__dirname + '/database.json');
+const encoding = "utf-8";
+
+  function load() {
+    const promiseCallback = (resolve, reject) => {
+        fs.readFile(dir, encoding, (error, data) => {
+                if(error) {
+                    reject(error);
+                    return;
+                }
+                try{
+                    const dados = JSON.parse(data);
+                    resolve(dados);
+                } catch (e){
+                    reject(e)
+                }  
+            })         
+        }
+        return new Promise(promiseCallback);       
+    }
+
+   function save(content) {
+        const promiseCallback = (resolve, reject) => {
+            fs.writeFile(dir, JSON.stringify(content, null, 4), encoding, (error) => {
+                if(error) {
+                    reject(error);
+                    return;
+                }
+                resolve(true);
+            });
+        };
+        return new Promise(promiseCallback)     
+    };
+
+
+   async function logar(login) {
+        console.log(login)
+        try{
+            const dados = await load();
+            const check = dados.hasOwnProperty(login.username);
+            if (check && (dados[login.username][1] == login.password)){
+                login.email = dados[login.username][0];
+                return [login.username, login.email];
+            }
+            else {
+                return ("Erro! Verifique suas credenciais...");
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+   async function cadastrar(cadastro) {
+        try{
+            const dados = await load();
+            const jsonLength = Object.keys(dados).length;
+            
+            for(i=0;i<jsonLength;i++){
+                if(cadastro.email == (Object.values(dados)[i][0])){
+                    return("Erro! Email já cadastrado.");
+                }
+            }
+            if(dados.hasOwnProperty(cadastro.username)){
+                return("Erro! Usuário já cadastrado.");
+            }
+            else {
+                dados[cadastro.username] = [cadastro.email, cadastro.password]
+                await save(dados);         
+                return("Usuário cadastrado com sucesso!")
+            }  
+        } catch (e) {
+            return e;
+        }   
+    }
+    
+  async function atualizar(atualizacao) {
+    try{
+        const dados = await load();
+        if(dados.hasOwnProperty(atualizacao.username)){
+            dados[atualizacao.username] = [atualizacao.email, atualizacao.password]
+            await save(dados);   
+            return("Usuário atualizado com sucesso!")
+        }
+        else {
+            return ("Erro! Usuário não existente");
+        }           
+    } catch (e) {
+        return e;
+    }  
+    }
+    
+   async function remover(username) {
+        const dados = await load();
+        if(dados.hasOwnProperty(username)){
+            delete dados[username];
+            await save(dados);
+            return ("Remoção completa.");
+        }
+        else {
+            return ("Erro! Não foi possível remover o usuário.");
+        }        
+    }
+
+    module.exports.logar = logar; 
+    module.exports.cadastrar = cadastrar;
+    module.exports.atualizar = atualizar;
+    module.exports.remover = remover;

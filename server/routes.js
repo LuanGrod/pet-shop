@@ -1,21 +1,15 @@
 const express = require("express");
 const route = express.Router();
-const indexController = require("./src/controller/indexController");
-const cadastroController = require("./src/controller/cadastroController");
-const loginController = require("./src/controller/loginController");
-const produtosController = require("./src/controller/produtosController");
-const usuarioController = require("./src/controller/usuarioController");
-
-route.get("/", indexController.paginaIndex);
-
-route.get("/login", loginController.paginaLogin);
+const loginController = require("./src/controller/loginController")
+const cadastroController = require("./src/controller/cadastroController")
+const usuarioController = require("./src/controller/usuarioController")
 
 route.post("/login", loginController.loginPost);
 
-route.get("/usuario", usuarioController.paginaUsuario);
+route.post("/cadastro", cadastroController.cadastroPost);
 
-route.get("/cadastro", cadastroController.paginaCadastro);
+route.put("/usuario", usuarioController.usuarioPut);
 
-route.get("/produtos", produtosController.paginaProdutos);
+route.delete("/usuario", usuarioController.usuarioDelete);
 
 module.exports = route;

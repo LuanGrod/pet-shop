@@ -1,11 +1,10 @@
-const LoginDAO = require("../model/DAO");
+const Login = require("../model/Login");
 
 exports.loginPost = (request, response) => {
-    const login = {
-        username: request.body.username, 
-        password: request.body.password
-    };
-    LoginDAO.logar(login).then(result => {
+    const login = new Login(request.body);
+    login.autenticar().then( result => {
         response.send(result);
-    });
+    }).catch(error => {
+        response.send(error);
+    });   
 }

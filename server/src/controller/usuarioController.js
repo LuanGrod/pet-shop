@@ -1,26 +1,19 @@
-const UsuarioDAO = require("../model/DAO");
+const Usuario = require("../model/Usuario");
 
-exports.usuarioPut = (request, response) => {
-
-    const atualizacao = {
-        username: request.body.username,
-        email: request.body.email,
-        password: request.body.password
-    };
-
-    if (atualizacao.username == "" || atualizacao.email == "" || atualizacao.password == ""){
-        response.send("Erro! Não podem existir dados em branco.")
-    }
-    else{
-        UsuarioDAO.atualizar(atualizacao).then( result => {
-            response.send(result);
-        })
-    }
+exports.usuarioPut = (request, response) => {   
+    const usuario = new Usuario(request.body);
+    usuario.atualizar().then( result => {
+        response.send(result);
+    }).catch(error => {
+        response.send(error);
+    });   
 }
 
 exports.usuarioDelete = (request, response) => {
-
-    UsuarioDAO.remover(request.body.username).then( result => {
+    const usuario = new Usuario(request.body);
+    usuario.remover().then( result => {
         response.send(result);
-    })
+    }).catch(error => {
+        response.send(error);
+    });     
 }

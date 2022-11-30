@@ -1,19 +1,10 @@
-const CadastroDAO = require("../model/DAO")
+const Cadastro = require("../model/Cadastro")
 
 exports.cadastroPost = (request, response) => {
-
-    const cadastro = {
-        username: request.body.username,
-        email: request.body.email,
-        password: request.body.password
-    };
-
-    if (cadastro.username == "" || cadastro.email == "" || cadastro.password == ""){
-        response.send("Erro! Não podem existir dados em branco.")
-    }
-    else {
-        CadastroDAO.cadastrar(cadastro).then( result => {
-            response.send(result);
-        })
-    }    
+    const cadastro = new Cadastro(request.body);
+    cadastro.cadastrar().then( result => {
+        response.send(result); 
+    }).catch(error => {
+        response.send(error)
+    });   
 }

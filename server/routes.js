@@ -4,7 +4,7 @@ const loginController = require("./src/controller/loginController")
 const cadastroController = require("./src/controller/cadastroController")
 const usuarioController = require("./src/controller/usuarioController")
 
-route.post("/login", loginController.loginPost);
+route.post("/login", loginController.loginPost)
 
 route.post("/cadastro", cadastroController.cadastroPost);
 

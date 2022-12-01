@@ -1,7 +1,12 @@
 const fs = require('fs');
 
+//Classe de acesso aos dados. Pelo fato de ser uma classe, para processamento assíncrono, seus métodos
+//retornam promises, as quais são consumidas por outras funções (locais ou de outros módulos)
+//que também retornam outras promises. Esse encadeamento acontece até a resposta ser enviada.
 class DAO {
+    //Diretório do arquivo de dados de usuários (é utilizado um arquivo.json para armazenamento)
     static #dir = (__dirname + '/users.json');
+    //encoding utf-8 para escrever em pt-br
     static #encoding = "utf-8";
 
     get dir() {
@@ -12,6 +17,7 @@ class DAO {
         return this.#encoding;
     }
 
+    //Método que carrega o arquivo de dados de usuário - Retorna uma promise.
     static load() {
         const promise = (resolve, reject) => {
             fs.readFile(this.#dir, this.#encoding, (error, data) => {
@@ -31,6 +37,7 @@ class DAO {
             return new Promise(promise);       
     }
     
+    //Método para salvar modificações no arquivo de dados de usuário - Retorna uma promise.
     static save(content) {
         const promise = (resolve, reject) => {
             fs.writeFile(this.#dir, JSON.stringify(content, null, 4), this.#encoding, (error) => {
@@ -44,15 +51,15 @@ class DAO {
         return new Promise(promise)     
     };
 
-
-   static logar(username, password) {
-
+    //Método para autenticação. Utiliza o método de carregamento de arquivo, consumindo sua promise e
+    //gerando uma nova promise como resposta.
+   static autenticar(username, password) {
         const promise = (resolve, reject) => {
                 DAO.load().then( dados => {
                     const check = dados.hasOwnProperty(username);
                     if (check && (dados[username][1] == password)){
                         const email = dados[username][0];
-                        resolve([username, email]);
+                        resolve({username, email});
                     } 
                     else{
                         reject("Erro! Verifique suas credenciais...");
@@ -66,6 +73,8 @@ class DAO {
         return new Promise(promise);
     }        
 
+    //Método para cadastro. Utiliza o método de carregamento e salvamento de arquivos, consumindo suas promises,
+    //gerando uma nova promise como resposta.
    static cadastrar(username, email, password) {
         const promise = (resolve, reject) => {
             DAO.load().then( dados => {
@@ -98,7 +107,10 @@ class DAO {
         return new Promise(promise);
     }
     
-  static atualizar(username, email, password) {
+    //Método para atualização de dados de usuário. Princípios similares aos do método de cadastro.
+    //Utiliza os métodos de carregamento e salvamendo de dados, consumindo suas promises e
+    //gerando uma nova promise como resposta.
+   static atualizar(username, email, password) {
         const promise = (resolve, reject) => {
             DAO.load().then( dados => {
                 if(dados.hasOwnProperty(username)){
@@ -122,6 +134,9 @@ class DAO {
         return new Promise(promise);
     }     
 
+    //Método de remoção de usuário. 
+    //Utiliza os métodos de carregamento e salvamendo de dados, consumindo suas promises e
+    //gerando uma nova promise como resposta.
    static remover(username) {
         const promise = (resolve, reject) => {
             DAO.load().then( dados => {

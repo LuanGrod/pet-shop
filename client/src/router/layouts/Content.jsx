@@ -9,8 +9,6 @@ import { Me } from '../pages/Me';
 import { Login } from '../pages/Login';
 import { NotFound } from '../pages/NotFound';
 
-import { useSelector } from "react-redux";
-import { selectUser } from "../../features/userSlice";
 
 
 export function Content(){

@@ -34,6 +34,7 @@ class Usuario {
                 reject("Erro! Não podem existir dados em branco.")
             }
             else {
+                console.log("oi")
                 DAO.autenticar(this.#username, this.#password).then( result => {
                     resolve(result);
                 }).catch( error => {

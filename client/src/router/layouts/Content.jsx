@@ -5,13 +5,16 @@ import { Home } from '../pages/Home';
 import { Sobre } from '../pages/Sobre';
 import { Produtos } from '../pages/Produtos';
 import { Carrinho } from '../pages/Carrinho';
-import { Auth } from '../pages/Auth';
 import { Me } from '../pages/Me';
+import { Login } from '../pages/Login';
 import { NotFound } from '../pages/NotFound';
 
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
 
-export class Content extends Component {
-  render() {
+
+export function Content(){
+
     return (
       <main>
       <Routes>
@@ -19,13 +22,12 @@ export class Content extends Component {
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/produtos" element={<Produtos />} />
         <Route path="/carrinho" element={<Carrinho />} />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="/Login" element={<Login />} />
         <Route path="/me" element={<Me />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </main>
     );
-  }
 }
 
 export default Content;

@@ -1,6 +1,6 @@
 import React from "react";
 import { HiFunnel } from "react-icons/hi2";
-
+import ObjectRow from './ObjectRow';
 function SidebarFilter(props) {
   const rows = [];
   for (let i = 0; i < props.children; i++) {

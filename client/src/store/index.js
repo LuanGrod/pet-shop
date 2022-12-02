@@ -16,7 +16,9 @@ export const login = createSlice({
             state.email = payload.email
         },
         sair: (state) => {
-            state.user = null;
+            state.logado = !state.logado;
+            state.usuario = "";
+            state.email = "";
         }
     }
 })

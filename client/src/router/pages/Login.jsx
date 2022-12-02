@@ -34,7 +34,6 @@ export function Login() {
         return resposta.json();
       })
       .then(resposta => {
-        console.log(resposta)
         if (typeof resposta.username != "undefined") { //se retornar um usuario
           dispatch(entrar(resposta)) //Faz a mudança do estado global
           navigate("/")//redireciona para home
@@ -71,6 +70,7 @@ export function Login() {
         </div>
 
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Acessar</button>
+        <p>Não tem conta? <a href="./cadastro" className="text-blue-600">Cadastre-se</a> </p>
         <p className="text-red-700">{erro}</p>
       </form>
       <div>

@@ -21,74 +21,74 @@ class DAO {
     static load() {
         const promise = (resolve, reject) => {
             fs.readFile(this.#dir, this.#encoding, (error, data) => {
-                    if(error) {
-                        reject(error);
-                        return;
-                    }
-                    try{
-                        const dados = JSON.parse(data);
-                        resolve(dados);
-                    } catch (e){
-                        reject(e)
-                        return;
-                    }  
-                })         
-            }
-            return new Promise(promise);       
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                try {
+                    const dados = JSON.parse(data);
+                    resolve(dados);
+                } catch (e) {
+                    reject(e)
+                    return;
+                }
+            })
+        }
+        return new Promise(promise);
     }
-    
+
     //Método para salvar modificações no arquivo de dados de usuário - Retorna uma promise.
     static save(content) {
         const promise = (resolve, reject) => {
             fs.writeFile(this.#dir, JSON.stringify(content, null, 4), this.#encoding, (error) => {
-                if(error) {
+                if (error) {
                     reject(error);
                     return;
                 }
                 resolve(true);
             });
         };
-        return new Promise(promise)     
+        return new Promise(promise)
     };
 
     //Método para autenticação. Utiliza o método de carregamento de arquivo, consumindo sua promise e
     //gerando uma nova promise como resposta.
-   static autenticar(username, password) {
+    static autenticar(username, password) {
         const promise = (resolve, reject) => {
-                DAO.load().then( dados => {
-                    const check = dados.hasOwnProperty(username);
-                    if (check && (dados[username][1] == password)){
-                        const email = dados[username][0];
-                        resolve({username, email});
-                        console.log(username, email);
-                    } 
-                    else{
-                        const resposta = JSON.stringify("Erro! Verifique suas credenciais...");
-                        reject(resposta)                              
-                    }
-                }).catch( error => {
-                    reject(error);
-                    return;
-                });           
+            DAO.load().then(dados => {
+                const check = dados.hasOwnProperty(username);
+                if (check && (dados[username][1] == password)) {
+                    const email = dados[username][0];
+                    resolve({ username, email });
+                    console.log(username, email);
+                }
+                else {
+                    const resposta = JSON.stringify("Erro! Verifique suas credenciais...");
+                    reject(resposta)
+                }
+            }).catch(error => {
+                reject(error);
+                return;
+            });
         }
         return new Promise(promise);
-    }        
+    }
 
     //Método para cadastro. Utiliza o método de carregamento e salvamento de arquivos, consumindo suas promises,
     //gerando uma nova promise como resposta.
-   static cadastrar(username, email, password) {
+    static cadastrar(username, email, password) {
         const promise = (resolve, reject) => {
-            DAO.load().then( dados => {
+            DAO.load().then(dados => {
                 const jsonLength = Object.keys(dados).length;
-                
-                for(let i=0;i<jsonLength;i++){
-                    if(email == (Object.values(dados)[i][0])){
+
+                for (let i = 0; i < jsonLength; i++) {
+                    if (email == (Object.values(dados)[i][0])) {
                         const resposta = JSON.stringify("Erro! Email já cadastrado.")
                         reject(resposta);
                         return;
                     }
                 }
-                if(dados.hasOwnProperty(username)){
+                if (dados.hasOwnProperty(username)) {
                     const resposta = JSON.stringify("Erro! Usuário já cadastrado.")
                     reject(resposta);
                     return;
@@ -98,79 +98,79 @@ class DAO {
                     DAO.save(dados).then(() => {
                         const resposta = JSON.stringify("Usuário cadastrado com sucesso!")
                         resolve(resposta)
-                    }).catch( error => {
+                    }).catch(error => {
                         const resposta = JSON.stringify("Não foi possível salvar os dados: " + error)
                         reject(resposta)
                         return;
-                    });  
+                    });
                 }
-            }).catch( error => {
+            }).catch(error => {
                 reject(error);
                 return;
             })
         }
         return new Promise(promise);
     }
-    
+
     //Método para atualização de dados de usuário. Princípios similares aos do método de cadastro.
     //Utiliza os métodos de carregamento e salvamendo de dados, consumindo suas promises e
     //gerando uma nova promise como resposta.
-   static atualizar(username, email, password) {
+    static atualizar(username, email, password) {
         const promise = (resolve, reject) => {
-            DAO.load().then( dados => {
-                if(dados.hasOwnProperty(username)){
+            DAO.load().then(dados => {
+                if (dados.hasOwnProperty(username)) {
                     dados[username] = [email, password]
                     DAO.save(dados).then(() => {
                         const resposta = JSON.stringify("Usuário atualizado com sucesso!")
                         resolve(resposta)
-                    }).catch( error => {
+                    }).catch(error => {
                         const resposta = JSON.stringify("Não foi possível salvar os dados: " + error)
                         reject(resposta)
                         return;
-                    });                     
+                    });
                 }
                 else {
                     const resposta = JSON.stringify("Erro! Usuário não existente")
                     reject(resposta);
                     return;
                 }
-            }).catch( error => {
+            }).catch(error => {
                 reject(error);
                 return;
             })
         }
         return new Promise(promise);
-    }     
+    }
 
     //Método de remoção de usuário. 
     //Utiliza os métodos de carregamento e salvamendo de dados, consumindo suas promises e
     //gerando uma nova promise como resposta.
-   static remover(username) {
+    static remover(username) {
         const promise = (resolve, reject) => {
-            DAO.load().then( dados => {
-                if(dados.hasOwnProperty(username)){
+            DAO.load().then(dados => {
+                if (dados.hasOwnProperty(username)) {
                     delete dados[username];
                     DAO.save(dados).then(() => {
                         const resposta = JSON.stringify("Usuário removido com sucesso!")
                         resolve(resposta)
-                    }).catch( error => {
+                    }).catch(error => {
                         const resposta = JSON.stringify("Não foi possível salvar os dados: " + error)
                         reject(resposta)
                         return;
-                    }); 
+                    });
                 }
                 else {
                     const resposta = JSON.stringify("Erro! Não foi possível remover o usuário.")
                     reject(resposta);
                     return;
                 }
-            }).catch( error => {
+            }).catch(error => {
                 reject(error);
                 return;
             })
         }
-        return new Promise(promise);               
-    }   
+        return new Promise(promise);
+    }
 }
 
 module.exports = DAO;

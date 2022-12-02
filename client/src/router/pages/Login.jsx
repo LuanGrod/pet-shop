@@ -23,7 +23,7 @@ export function Login() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        
+        'Accept': 'application/json'
       },
       body: new URLSearchParams({
         username: name,
@@ -31,12 +31,8 @@ export function Login() {
       })
     })
       .then(resposta => {
-        console.log(resposta)
         return resposta.json();
       })
-      .then(resposta => {
-       console.log(resposta)
-      });
   }
 
   const [name, setName] = useState("")

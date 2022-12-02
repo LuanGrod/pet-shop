@@ -2,5 +2,13 @@
     "usuario": [
         "email@email.com",
         "senha1"
+    ],
+    "luan": [
+        "luan@email.com",
+        "senha123"
+    ],
+    "teste": [
+        "teste@email",
+        "senha123"
     ]
 }

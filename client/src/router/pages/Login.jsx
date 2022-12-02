@@ -10,20 +10,20 @@ export function Login() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //console.log(logadoEstado)
-    if (logadoEstado) {
+    if (logadoEstado === true) {
+      alert("Você já está logado")
       navigate('/');
     }
   }, [logadoEstado, navigate])
 
 
 
-  function getUsuario() {
+  function login() {
     fetch('http://localhost:6969/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        
+
       },
       body: new URLSearchParams({
         username: name,
@@ -31,24 +31,32 @@ export function Login() {
       })
     })
       .then(resposta => {
-        console.log(resposta)
         return resposta.json();
       })
       .then(resposta => {
-       console.log(resposta)
+        console.log(resposta)
+        if (typeof resposta.username != "undefined") { //se retornar um usuario
+          dispatch(entrar(resposta)) //Faz a mudança do estado global
+          navigate("/")//redireciona para home
+        } else { //se retornar um erro
+          setErro(resposta);
+        }
       });
   }
 
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
+  const [erro, setErro] = useState("");
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getUsuario();
-    /*dispatch(entrar({
-      name: name,
-      password: password
-    }))*/
+    if (name && password) {
+      setErro('');
+      login();
+    } else {
+      setErro('Campo(s) vazio(s)');
+    }
   }
 
   return (
@@ -63,7 +71,11 @@ export function Login() {
         </div>
 
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Acessar</button>
+        <p className="text-red-700">{erro}</p>
       </form>
+      <div>
+    
+      </div>
     </div>
   )
 }

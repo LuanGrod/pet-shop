@@ -60,10 +60,11 @@ class DAO {
                     if (check && (dados[username][1] == password)){
                         const email = dados[username][0];
                         resolve({username, email});
+                        console.log(username, email);
                     } 
                     else{
-                        reject("Erro! Verifique suas credenciais...");
-                        return;
+                        const resposta = JSON.stringify("Erro! Verifique suas credenciais...");
+                        reject(resposta)                              
                     }
                 }).catch( error => {
                     reject(error);
@@ -82,20 +83,24 @@ class DAO {
                 
                 for(let i=0;i<jsonLength;i++){
                     if(email == (Object.values(dados)[i][0])){
-                        reject("Erro! Email já cadastrado.");
+                        const resposta = JSON.stringify("Erro! Email já cadastrado.")
+                        reject(resposta);
                         return;
                     }
                 }
                 if(dados.hasOwnProperty(username)){
-                    reject("Erro! Usuário já cadastrado.");
+                    const resposta = JSON.stringify("Erro! Usuário já cadastrado.")
+                    reject(resposta);
                     return;
                 }
                 else {
                     dados[username] = [email, password]
                     DAO.save(dados).then(() => {
-                        resolve("Usuário cadastrado com sucesso!")
+                        const resposta = JSON.stringify("Usuário cadastrado com sucesso!")
+                        resolve(resposta)
                     }).catch( error => {
-                        reject("Não foi possível salvar os dados: " + error)
+                        const resposta = JSON.stringify("Não foi possível salvar os dados: " + error)
+                        reject(resposta)
                         return;
                     });  
                 }
@@ -116,14 +121,17 @@ class DAO {
                 if(dados.hasOwnProperty(username)){
                     dados[username] = [email, password]
                     DAO.save(dados).then(() => {
-                        resolve("Usuário atualizado com sucesso!");
+                        const resposta = JSON.stringify("Usuário atualizado com sucesso!")
+                        resolve(resposta)
                     }).catch( error => {
-                        reject("Não foi possível salvar os dados: " + error);
+                        const resposta = JSON.stringify("Não foi possível salvar os dados: " + error)
+                        reject(resposta)
                         return;
                     });                     
                 }
                 else {
-                    reject("Erro! Usuário não existente");
+                    const resposta = JSON.stringify("Erro! Usuário não existente")
+                    reject(resposta);
                     return;
                 }
             }).catch( error => {
@@ -143,14 +151,17 @@ class DAO {
                 if(dados.hasOwnProperty(username)){
                     delete dados[username];
                     DAO.save(dados).then(() => {
-                        resolve("Usuário removido com sucesso!")
+                        const resposta = JSON.stringify("Usuário removido com sucesso!")
+                        resolve(resposta)
                     }).catch( error => {
-                        reject("Não foi possível salvar os dados: " + error)
+                        const resposta = JSON.stringify("Não foi possível salvar os dados: " + error)
+                        reject(resposta)
                         return;
                     }); 
                 }
                 else {
-                    reject ("Erro! Não foi possível remover o usuário.");
+                    const resposta = JSON.stringify("Erro! Não foi possível remover o usuário.")
+                    reject(resposta);
                     return;
                 }
             }).catch( error => {

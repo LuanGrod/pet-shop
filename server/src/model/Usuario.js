@@ -31,10 +31,10 @@ class Usuario {
         const promise = (resolve, reject) => {
             if ((this.#username == "") || (this.#password == "") || 
             (typeof this.#username === "undefined") || (typeof this.#password === "undefined")){
-                reject("Erro! Não podem existir dados em branco.")
+                const resposta = JSON.stringify("Erro! Não podem existir dados em branco.")
+                reject(resposta)
             }
             else {
-                console.log("oi")
                 DAO.autenticar(this.#username, this.#password).then( result => {
                     resolve(result);
                 }).catch( error => {
@@ -51,7 +51,8 @@ class Usuario {
         const promise = (resolve, reject) => {
             if ((this.#username == "") || (this.#email == "") || (this.#password == "") 
             || (typeof this.#username === "undefined") || (typeof this.#email === "undefined") || (typeof this.#password === "undefined")){
-                resolve("Erro! Não podem existir dados em branco.")
+                const resposta = JSON.stringify("Erro! Não podem existir dados em branco.")
+                reject(resposta)
             }
             else {
                 DAO.cadastrar(this.#username, this.#email, this.#password).then(result => {
@@ -71,7 +72,8 @@ class Usuario {
         const promise = (resolve, reject) => {
             if ((this.#username == "") || (this.#email == "") || (this.#password == "") 
             || (typeof this.#username === "undefined") || (typeof this.#email === "undefined") || (typeof this.#password === "undefined")){
-                resolve("Erro! Não podem existir dados em branco.")
+                const resposta = JSON.stringify("Erro! Não podem existir dados em branco.")
+                reject(resposta)
             }
             else{
                 DAO.atualizar(this.#username, this.#email, this.#password).then( result => {
@@ -89,7 +91,8 @@ class Usuario {
     remover() {
         const promise = (resolve, reject) => {
             if ((this.#username == "") || (typeof this.#username === "undefined")) {
-                reject("Erro! Não podem existir dados em branco.")
+                const resposta = JSON.stringify("Erro! Não podem existir dados em branco.")
+                reject(resposta)
             }
             else{
                 DAO.remover(this.#username).then ( result => {

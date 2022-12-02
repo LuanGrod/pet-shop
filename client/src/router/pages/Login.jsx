@@ -23,7 +23,7 @@ export function Login() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json'
+        
       },
       body: new URLSearchParams({
         username: name,
@@ -35,7 +35,7 @@ export function Login() {
         return resposta.json();
       })
       .then(resposta => {
-        document.getElementById('post').innerHTML = resposta.value
+       console.log(resposta)
       });
   }
 

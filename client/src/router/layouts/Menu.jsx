@@ -27,7 +27,7 @@ export function Menu() {
         <Link to="/produtos" className="my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50 ">Produtos</Link>
         <Link to="/sobre" className="my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50 ">Sobre</Link>
         <Link to="/carrinho" className="my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50 m-auto"><TbShoppingCart className="m-0 text-2xl" /></Link>
-        <Link to="/me" className="my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50 m-auto"><TbUserCircle className="m-0 text-2xl" /></Link>
+        <Link to="/usuario" className="my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50 m-auto"><TbUserCircle className="m-0 text-2xl" /></Link>
       </div>
 
     </nav>

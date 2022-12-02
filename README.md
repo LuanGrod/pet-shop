@@ -102,4 +102,6 @@ Arthur Gonçalves Luiz - https://www.linkedin.com/in/arthur-gonçalves-luiz-3a5a
 
 Luan Guilherme Rodrigues - https://www.linkedin.com/in/luan-grod/
 
+Rhenan Abachioni Gomes - https://www.linkedin.com/in/rhenan-gomes-329350246/
+
 ~põe o linkedin de vocês aqui~

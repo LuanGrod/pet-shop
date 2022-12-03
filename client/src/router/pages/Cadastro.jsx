@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import store, { entrar } from "../../store"
+import store from "../../store"
 
 function Cadastro() {
   const navigate = useNavigate(); //Hook usado para redirecionamento
   const logadoEstado = store.getState().logado;
-  const dispatch = useDispatch();
 
   useEffect(() => {
     //console.log(logadoEstado)
@@ -33,7 +31,7 @@ function Cadastro() {
       })
       .then(resposta => {
         alert(resposta);
-        if (resposta == "Usuário cadastrado com sucesso!") { //se retornar sucesso
+        if (resposta === "Usuário cadastrado com sucesso!") { //se retornar sucesso
           navigate("/login")//redireciona para login
         }
       });
@@ -46,10 +44,6 @@ function Cadastro() {
   const handleSubmit = (e) => {
     e.preventDefault();
     postCadastro();
-    /*dispatch(entrar({
-      name: name,
-      password: password
-    }))*/
   }
 
   return (

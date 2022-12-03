@@ -42,21 +42,12 @@ class ProductsDAO {
 
     /**
      * Método para consulta de produtos. Retorna seus dados em forma de promise.
-     * @param {*} id 
-     * @returns Promise (descricao, preco, imagem || erro)
+     * @returns Promise (Produtos || erro)
      */
-    static consultar(id) {
+    static consultar() {
         const promise = (resolve, reject) => {
             ProductsDAO.load().then(dados => {           
-                if(dados.hasOwnProperty(id)){
-                    const resposta = {descricao: dados[id][0], preco: dados[id][1], imagem: dados[id][2], estoque: dados[id][3]};
-                    resolve(resposta);
-                }
-                else{
-                    const resposta = JSON.stringify("Erro! Produto não existente...");
-                    reject(resposta)
-                    return
-                }
+                resolve(dados);
             }).catch(error => {
                 reject(error);
                 return;

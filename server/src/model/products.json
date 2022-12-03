@@ -1,5 +1,17 @@
 {
-    "id1": [
+    "1": [
+        "Descricao1",
+        "20,00",
+        "url",
+        "true"
+    ],
+    "2": [
+        "Descricao2",
+        "20,00",
+        "url",
+        "true"
+    ],
+    "3": [
         "Descricao1",
         "20,00",
         "url",

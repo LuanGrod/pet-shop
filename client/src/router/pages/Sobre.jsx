@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-export function Sobre(){
+export function Sobre() {
   return <div>Sobre</div>;
 }
 

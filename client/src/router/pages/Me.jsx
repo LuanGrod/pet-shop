@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-export function Me(){
+function Me() {
   return <div>Me</div>;
 }
 

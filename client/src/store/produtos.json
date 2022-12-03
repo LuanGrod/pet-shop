@@ -1,0 +1,41 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "descricao": "item 1",
+      "src": "https://esal.api.alleshub.com.br/images/erp_esalpet/item/924.0.jpg",
+      "preco": 192.99
+    },
+    {
+      "id": 2,
+      "descricao": "item 2",
+      "src": "https://esal.api.alleshub.com.br/images/erp_esalpet/item/924.0.jpg",
+      "preco": 192.99
+    },
+    {
+      "id": 3,
+      "descricao": "item 3",
+      "src": "https://esal.api.alleshub.com.br/images/erp_esalpet/item/924.0.jpg",
+      "preco": 192.99
+    },
+    {
+      "id": 4,
+      "descricao": "item 4",
+      "src": "https://esal.api.alleshub.com.br/images/erp_esalpet/item/924.0.jpg",
+      "preco": 192.99
+    },
+    {
+      "id": 5,
+      "descricao": "item 5",
+      "src": "https://esal.api.alleshub.com.br/images/erp_esalpet/item/924.0.jpg",
+      "preco": 192.99
+    },
+    {
+      "id": 6,
+      "descricao": "item 6",
+      "src": "https://esal.api.alleshub.com.br/images/erp_esalpet/item/924.0.jpg",
+      "preco": 192.99
+    }
+  ],
+  "carrinhoProdutos": []
+}

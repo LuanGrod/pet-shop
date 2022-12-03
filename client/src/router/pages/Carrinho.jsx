@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
- export function Carrinho(){
+function Carrinho() {
 
   // State: a counter value
   const [counter, setCounter] = useState(0)
@@ -14,7 +14,7 @@ import React, { useState } from "react";
     <div>
       Value: {counter} <button onClick={increment}>Increment</button>
     </div>
-    );
+  );
 }
 
 export default Carrinho;

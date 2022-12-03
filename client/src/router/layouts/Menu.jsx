@@ -15,7 +15,7 @@ export function Menu() {
   })
 
   return (
-    <nav className="w-screen h-20 flex justify-between bg-brand-dark z-50">
+    <nav className="w-auto h-20 flex justify-between bg-brand-dark z-50">
       <div className="h-full flex">  {/* left */}
         <img src={logo} alt="logo" className="ml-6" />
         <Link to="/" className="my-auto text-heading text-white "></Link>

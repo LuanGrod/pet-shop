@@ -2,10 +2,10 @@ import React from "react";
 import Sidebar from './../../components/Sidebar';
 import Vitrine from './../../components/Vitrine';
 
-export function Produtos() {
+function Produtos() {
 
   return (
-    <div className="flex w-screen h-screen justify-center items-center bg-slate-200">
+    <div className="flex w-full h-auto justify-center items-center bg-slate-200">
       <Sidebar />
       <Vitrine />
     </div>

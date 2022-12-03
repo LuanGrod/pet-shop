@@ -20,7 +20,6 @@ function Cadastro() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json'
       },
       body: new URLSearchParams({
         username: name,
@@ -29,9 +28,14 @@ function Cadastro() {
       })
     })
       .then(resposta => {
-        console.log(resposta)
         return resposta.json();
       })
+      .then(resposta => {
+        alert(resposta);
+        if (resposta == "Usuário cadastrado com sucesso!") { //se retornar sucesso
+          navigate("/login")//redireciona para login
+        }
+      });
   }
 
   const [name, setName] = useState("")

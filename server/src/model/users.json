@@ -10,5 +10,25 @@
     "teste": [
         "teste@email",
         "senha123"
+    ],
+    "usuario2": [
+        "email2@email.com",
+        "senha123"
+    ],
+    "teste1": [
+        "teste1@email.com",
+        "123"
+    ],
+    "teste2": [
+        "teste2@email.com",
+        "teste"
+    ],
+    "teste23": [
+        "test2e2@email.com",
+        "teste"
+    ],
+    "teste233": [
+        "test22e2@email.com",
+        "teste"
     ]
 }

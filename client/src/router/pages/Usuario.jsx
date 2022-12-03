@@ -31,7 +31,7 @@ export function Usuario() {
     <div className="usuario">
       <h1><b>Usuário Logado</b></h1>
       <p>Nome: {usuario}</p>
-      <p>Email :{email}</p>
+      <p>Email: {email}</p>
       <div className='form'>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type='button' >Excluir</button> 
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type='button' >Editar</button>

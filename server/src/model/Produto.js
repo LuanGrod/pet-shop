@@ -5,12 +5,14 @@ class Produto {
     #descricao;
     #preco;
     #imagem;
+    #estoque;
 
     constructor (query) {
         this.#id = query.id;
         this.#descricao = query.descricao;
         this.#preco = query.preco;
         this.#imagem = query.imagem;
+        this.#estoque = query.estoque;
     }
 
     get id() {
@@ -27,6 +29,10 @@ class Produto {
 
     get imagem() {
         return this.#imagem;
+    }
+
+    get estoque() {
+        return this.#estoque;
     }
 
     consultar() {

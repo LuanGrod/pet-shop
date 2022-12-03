@@ -49,7 +49,7 @@ class ProductsDAO {
         const promise = (resolve, reject) => {
             ProductsDAO.load().then(dados => {           
                 if(dados.hasOwnProperty(id)){
-                    const resposta = {descricao: dados[id][0], preco: dados[id][1], imagem: dados[id][2]};
+                    const resposta = {descricao: dados[id][0], preco: dados[id][1], imagem: dados[id][2], estoque: dados[id][3]};
                     resolve(resposta);
                 }
                 else{

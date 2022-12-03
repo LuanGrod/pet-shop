@@ -12,4 +12,4 @@ exports.loginPost = (request, response) => {
     }).catch(error => {
         response.send(error);
     });   
-}
+};

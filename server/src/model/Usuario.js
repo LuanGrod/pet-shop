@@ -1,9 +1,9 @@
-const DAO = require("./DAO");
+const UsersDAO = require("./UsersDAO");
 
 //
 /**
  * Classe de domínio. 
- * Realiza validação e utiliza os métodos da classe DAO. 
+ * Realiza validação e utiliza os métodos da classe UsersDAO. 
  * @returns promise
 */
 class Usuario {
@@ -30,7 +30,7 @@ class Usuario {
     }
 
     /**
-     * Invoca o método "autenticar" da classe DAO, realizando validação. 
+     * Invoca o método "autenticar" da classe UsersDAO, realizando validação. 
      * Consome a promise recebida e gera uma nova promise como resposta.
      * @returns promise
      */
@@ -42,7 +42,7 @@ class Usuario {
                 reject(resposta)
             }
             else {
-                DAO.autenticar(this.#username, this.#password).then( result => {
+                UsersDAO.autenticar(this.#username, this.#password).then( result => {
                     resolve(result);
                 }).catch( error => {
                     reject(error)
@@ -53,7 +53,7 @@ class Usuario {
     }
 
     /**
-     * Invoca o método "cadastrar" da classe DAO, realizando validação. 
+     * Invoca o método "cadastrar" da classe UsersDAO, realizando validação. 
      * Consome a promise recebida e gera uma nova promise como resposta. 
      * @returns promise
     */   
@@ -65,7 +65,7 @@ class Usuario {
                 reject(resposta)
             }
             else {
-                DAO.cadastrar(this.#username, this.#email, this.#password).then(result => {
+                UsersDAO.cadastrar(this.#username, this.#email, this.#password).then(result => {
                     resolve(result);
                 }).catch( error => {
                     reject(error)
@@ -78,7 +78,7 @@ class Usuario {
     
 
     /**
-     * Invoca o método "atualizar" da classe DAO, realizando validação. 
+     * Invoca o método "atualizar" da classe UsersDAO, realizando validação. 
      * Consome a promise recebida e gera uma nova promise como resposta.
      * @returns promise
      */
@@ -90,7 +90,7 @@ class Usuario {
                 reject(resposta)
             }
             else{
-                DAO.atualizar(this.#username, this.#email, this.#password).then( result => {
+                UsersDAO.atualizar(this.#username, this.#email, this.#password).then( result => {
                     resolve(result);
                 }).catch( error => {
                     reject(error)
@@ -101,7 +101,7 @@ class Usuario {
     }
 
     /**
-     * Invoca o método "remover" da classe DAO, realizando validação. 
+     * Invoca o método "remover" da classe UsersDAO, realizando validação. 
      * Consome a promise recebida e gera uma nova promise como resposta.
      * @returns promise
      */
@@ -112,7 +112,7 @@ class Usuario {
                 reject(resposta)
             }
             else{
-                DAO.remover(this.#username).then ( result => {
+                UsersDAO.remover(this.#username).then ( result => {
                     resolve(result);
                 }).catch( error => {
                     reject(error)

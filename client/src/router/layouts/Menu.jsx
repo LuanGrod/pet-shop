@@ -17,9 +17,11 @@ export function Menu() {
   return (
     <nav className="w-screen h-20 flex justify-between bg-brand-dark z-50">
       <div className="h-full flex">  {/* left */}
-        <img src={logo} alt="logo" className="ml-6" />
-        <Link to="/" className="my-auto text-heading text-white "></Link>
-        <div className="my-auto p-7 text-yellow-400">Olá, <b>{usuarioLogado}</b></div>
+        <Link to="/" className="my-auto w-20 h-20 text-heading text-white "><img src={logo} alt="logo" className="ml-6" /></Link>
+        {
+          usuarioLogado ? <div className="my-auto p-7 text-yellow-400">Olá, <b>{usuarioLogado}</b></div> : ""
+        }       
+        
       </div>
       <div className="h-full flex"> {/* right */}
 

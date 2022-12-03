@@ -27,7 +27,7 @@ export const usuario = createSlice({
     }
 })
 
-export const { login, logout } = usuario.actions
+export const { entrar, sair } = usuario.actions
 
 export const Usuario = (state) => state.usuario
 
@@ -36,7 +36,7 @@ const persistConfig = {
     storage
 }
 
-const persistedReducer = persistReducer(persistConfig, login.reducer)
+const persistedReducer = persistReducer(persistConfig, usuario.reducer)
 
 const store = configureStore({
     reducer: persistedReducer,

@@ -8,6 +8,8 @@ route.post("/login", loginController.loginPost)
 
 route.post("/cadastro", cadastroController.cadastroPost);
 
+route.post("/usuario", usuarioController.usuarioPost);
+
 route.put("/usuario", usuarioController.usuarioPut);
 
 route.delete("/usuario", usuarioController.usuarioDelete);

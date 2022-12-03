@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { CarrosselImagens } from './../../components/CarrosselImagens';
+import React from "react";
+import Slider from "../../components/Slider";
 
-export function Home(){
+function Home() {
   return (
-    <CarrosselImagens/>
+    <Slider />
   )
 }
 

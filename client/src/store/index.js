@@ -1,12 +1,14 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage"
 import { persistReducer, persistStore } from "redux-persist"
+import initialStateProdutos from './produtos.json'
 
-export const login = createSlice({
-    name: "login",
-    initialState:{
+export const usuario = createSlice({
+    name: "usuario",
+    initialState: {
         usuario: "",
         email: "",
+        carrinho: [],
         logado: false
     },
     reducers: {
@@ -14,6 +16,8 @@ export const login = createSlice({
             state.logado = !state.logado
             state.usuario = payload.username
             state.email = payload.email
+            state.carrinho = payload.carrinho
+            //console.log(state.logado)
         },
         sair: (state) => {
             state.logado = !state.logado;
@@ -23,7 +27,7 @@ export const login = createSlice({
     }
 })
 
-export const {entrar, sair} = login.actions
+export const { login, logout } = usuario.actions
 
 export const Usuario = (state) => state.usuario
 

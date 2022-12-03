@@ -1,16 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { Home } from '../pages/Home';
-import { Sobre } from '../pages/Sobre';
-import { Produtos } from '../pages/Produtos';
-import { Carrinho } from '../pages/Carrinho';
-import { Usuario } from '../pages/Usuario';
-import { Login } from '../pages/Login';
-import { NotFound } from '../pages/NotFound';
+import Home from '../pages/Home';
+import Sobre from '../pages/Sobre';
+import Produtos from '../pages/Produtos';
+import Carrinho from '../pages/Carrinho';
+import Login from '../pages/Login';
+import NotFound from '../pages/NotFound';
 import Cadastro from "../pages/Cadastro";
-
-
+import Usuario from './../pages/Usuario';
 
 export function Content() {
 

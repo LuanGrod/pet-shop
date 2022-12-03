@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export function NotFound(){
+function NotFound() {
   return (
-    <div className="flex flex-col w-screen h-screen justify-start items-center bg-slate-200">
-      <h1 className="text-7xl p-28">Erro! Página não encontrada.</h1>
-      <Link to="/" className="text-4xl p-7 text-brand-dark bg-brand-yellow border-brand-dark border-2 rounded-2xl">Voltar ao início</Link>
+    <div className="flex flex-col w-auto h-screen justify-center items-center bg-slate-200">
+      <h1 className="text-7xl">Erro! Página não encontrada.</h1>
+      <Link to="/" className="text-2xl mt-8 px-5 py-4 text-brand-dark bg-brand-yellow-opacity-75 border-brand-dark hover:bg-brand-yellow ease-in duration-300 border-2 rounded-xl">Voltar ao início</Link>
     </div>
   );
 }

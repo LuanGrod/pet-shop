@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import store, { entrar } from "../../store"
 
-export function Login() {
+function Login() {
 
   const navigate = useNavigate(); //Hook usado para redirecionamento
   const logadoEstado = store.getState().logado;

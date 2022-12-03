@@ -18,6 +18,7 @@ module.exports = {
           'dark': '#112025',
           'dark-opacity-50': '#11202550',
           'yellow': '#fdc161',
+          'yellow-opacity-75': '#fdc16175',
           'yellow-opacity-50': '#fdc16150',
           'secundary': '#16bac6',
           'secundary-opacity-50': '#16bac650',

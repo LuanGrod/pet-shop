@@ -5,12 +5,10 @@ import Home from '../pages/Home';
 import Sobre from '../pages/Sobre';
 import Produtos from '../pages/Produtos';
 import Carrinho from '../pages/Carrinho';
-import Me from '../pages/Me';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Cadastro from "../pages/Cadastro";
-
-
+import Usuario from './../pages/Usuario';
 
 export function Content() {
 
@@ -23,7 +21,7 @@ export function Content() {
         <Route path="/carrinho" element={<Carrinho />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/me" element={<Me />} />
+        <Route path="/usuario" element={<Usuario />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </main>

@@ -10,15 +10,15 @@ function Login() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //console.log(logadoEstado)
-    if (logadoEstado) {
+    if (logadoEstado === true) {
+      alert("Você já está logado")
       navigate('/');
     }
   }, [logadoEstado, navigate])
 
 
 
-  function getUsuario() {
+  function login() {
     fetch('http://localhost:6969/login', {
       method: 'POST',
       headers: {
@@ -33,18 +33,29 @@ function Login() {
       .then(resposta => {
         return resposta.json();
       })
+      .then(resposta => {
+        if (typeof resposta.username != "undefined") { //se retornar um usuario
+          dispatch(entrar(resposta)) //Faz a mudança do estado global
+          navigate("/")//redireciona para home
+        } else { //se retornar um erro
+          setErro(resposta);
+        }
+      });
   }
 
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
+  const [erro, setErro] = useState("");
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getUsuario();
-    /*dispatch(entrar({
-      name: name,
-      password: password
-    }))*/
+    if (name && password) {
+      setErro('');
+      login();
+    } else {
+      setErro('Campo(s) vazio(s)');
+    }
   }
 
   return (
@@ -59,7 +70,12 @@ function Login() {
         </div>
 
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Acessar</button>
+        <p>Não tem conta? <a href="./cadastro" className="text-blue-600">Cadastre-se</a> </p>
+        <p className="text-red-700">{erro}</p>
       </form>
+      <div>
+    
+      </div>
     </div>
   )
 }

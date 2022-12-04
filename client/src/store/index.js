@@ -7,7 +7,7 @@ export const usuario = createSlice({
     initialState: {
         usuario: "",
         email: "",
-        carrinho: [],
+        produtosCarrinho: [],
         logado: false
     },
     reducers: {
@@ -22,14 +22,22 @@ export const usuario = createSlice({
             state.logado = !state.logado;
             state.usuario = "";
             state.email = "";
+        }, 
+        carrinho: (state, { payload }) => {
+            state.produtosCarrinho = [...state.produtosCarrinho, payload.payload]
+        },
+        esvaziaCarrinho: (state) => {
+            console.log("Esvaziando carrinho")
+            state.produtosCarrinho = []
         }
     }
 })
 
-export const { entrar, sair } = usuario.actions
+export const { entrar, sair, carrinho, esvaziaCarrinho } = usuario.actions
 
 export const Usuario = (state) => state.usuario
 export const Logado = (state) => state.logado
+export const ProdutosCarrinho = (state) => state.produtosCarrinho
 
 const persistConfig = {
     key: "Pet-shop",

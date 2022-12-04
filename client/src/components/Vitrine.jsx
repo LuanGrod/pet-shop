@@ -1,18 +1,15 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import ProdutosCard from './ProdutosCard';
+import store, { carrinho } from "../store"
+import { useDispatch } from "react-redux";
 
 function Vitrine() {
   const [produtos, setProdutos] = useState([]);
+  const dispatch = useDispatch();
 
   function buscaProdutos() {
-    fetch('http://localhost:6969/produtos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json'
-      }
-    })
+    fetch(`http://localhost:6969/produtos`)
       .then(resposta => {
         return resposta.json();
       })
@@ -26,6 +23,21 @@ function Vitrine() {
     buscaProdutos()
   }, [])
 
+  //const [produtosCarrinho, setProdutoCarrinho] = useState(pc)
+  function addToCart(id) {
+    const produtosCarrinho = store.getState().produtosCarrinho
+    let isInCart = false;
+    produtosCarrinho.forEach(el => {
+      if (id === el) {
+        isInCart = true
+      }
+    })
+    if (!isInCart) {
+      console.log("despachado")
+      dispatch(carrinho({ type: "ADD_TO_CART", payload: id }))
+    }
+  }
+
   return (
     <aside className="flex flex-col w-9/12 ml-5 h-auto ">
       <div>
@@ -37,13 +49,16 @@ function Vitrine() {
         <div className="m-5 flex flex-wrap w-full justify-between gap-y-3">
           {
             produtos.map(item =>
-              <ProdutosCard item={item} key={item} />
+              <ProdutosCard item={item} key={item} function={addToCart()} />
             )
           }
         </div>
       </div>
     </aside>
-  );
+  )
+
+
+
 }
 
 export default Vitrine;

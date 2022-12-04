@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import store, { entrar } from "../../store"
 
 function Login() {
@@ -59,24 +59,23 @@ function Login() {
   }
 
   return (
-    <div className="flex h-screen justify-center items-center">
-      <form className="" onSubmit={(e) => handleSubmit(e)}>
-        <div className="mb-6">
-          <input type="name" className="" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+    <div className="flex h-screen justify-center items-center bg-blob-1 bg-cover">
+      <form className="w-4/12 h-fit p-10 bg-white border rounded-2xl opacity-95" onSubmit={(e) => handleSubmit(e)}>
+        <div className="mb-5">
+          <label for="usuario" className="block mb-2 text-sm font-medium text-gray-900">Usuário</label>
+          <input type="text" id="usuario" className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Usuário" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
-
         <div className="mb-6">
-          <input type="password" className="" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <label for="senha" className="block mb-2 text-sm font-medium text-gray-900">Senha</label>
+          <input type="password" id="senha" className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Acessar</button>
-        <p>Não tem conta? <a href="./cadastro" className="text-blue-600">Cadastre-se</a> </p>
-        <p className="text-red-700">{erro}</p>
-      </form>
-      <div>
-    
-      </div>
-    </div>
+        <div className="flex flex-col">
+          <button className="w-full p-2.5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  text-center" type="submit">Acessar</button>
+          <span className="mt-2.5">Não tem conta? <Link to="/cadastro" className="text-blue-600 hover:font-medium">Cadastre-se</Link></span>
+          <p className="text-red-700">{erro}</p>
+        </div>
+      </form >
+    </div >
   )
 }
 

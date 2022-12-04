@@ -28,7 +28,8 @@ module.exports = {
       },
 
       backgroundImage: {
-        app: 'url(/BG-effects.png)'
+        'blob-1': 'url(../public/background.svg)',
+        'blob-2': 'url(../public/background2.svg)'
       }
     },
   },

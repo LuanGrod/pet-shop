@@ -13,7 +13,7 @@ import Usuario from './../pages/Usuario';
 export function Content() {
 
   return (
-    <main>
+    <main className="h-fit bg-gray-50">
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/sobre" element={<Sobre />} />

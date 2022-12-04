@@ -47,18 +47,21 @@ function Cadastro() {
   }
 
   return (
-    <div className="flex h-screen justify-center items-center">
-      <form className="" onSubmit={(e) => handleSubmit(e)}>
-        <div className="mb-6">
-          <input type="name" className="" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+    <div className="flex h-screen justify-center items-center bg-blob-2 bg-cover">
+      <form className="w-4/12 h-fit p-10 bg-white border rounded-2xl" onSubmit={(e) => handleSubmit(e)}>
+        <div className="mb-5">
+          <label for="usuario" className="block mb-2 text-sm font-medium text-gray-900">Usuário</label>
+          <input type="text" id="usuario" className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+
+        <div className="mb-5">
+          <label for="email" className="block mb-2 text-sm font-medium text-gray-900">E-mail</label>
+          <input type="email" id="email" className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
 
         <div className="mb-6">
-          <input type="email" className="" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-
-        <div className="mb-6">
-          <input type="password" className="" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <label for="senha" className="block mb-2 text-sm font-medium text-gray-900">Usuário</label>
+          <input type="password" id="senha" className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
 
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Cadastrar</button>

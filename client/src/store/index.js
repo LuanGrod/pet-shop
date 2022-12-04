@@ -1,7 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage"
 import { persistReducer, persistStore } from "redux-persist"
-import initialStateProdutos from './produtos.json'
 
 export const usuario = createSlice({
     name: "usuario",
@@ -30,6 +29,7 @@ export const usuario = createSlice({
 export const { entrar, sair } = usuario.actions
 
 export const Usuario = (state) => state.usuario
+export const Logado = (state) => state.logado
 
 const persistConfig = {
     key: "Pet-shop",

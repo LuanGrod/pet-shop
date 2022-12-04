@@ -54,7 +54,31 @@ class ProductsDAO {
             });
         }
         return new Promise(promise);
-    }    
+    }
+    
+    /**
+     * Método para consulta de produto por ID. Retorna seus dados em forma de promise.
+     * @returns Promise (Produtos || erro)
+     */
+     static consultarId(id) {
+        const promise = (resolve, reject) => {
+            ProductsDAO.load().then(dados => {
+                if(dados.hasOwnProperty(id)) {
+                    resolve(dados[id]);
+                } 
+                else {
+                    const resposta = JSON.stringify("Erro! Produto não encontrado...");
+                    reject(resposta)
+                    return
+                }                         
+            }).catch(error => {
+                reject(error);
+                return;
+            });
+        }
+        return new Promise(promise);
+    }      
 }
+
 
 module.exports = ProductsDAO

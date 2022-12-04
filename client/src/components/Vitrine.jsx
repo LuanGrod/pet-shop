@@ -9,7 +9,7 @@ function Vitrine() {
   const dispatch = useDispatch();
 
   function buscaProdutos() {
-    fetch(`http://localhost:6969/produtos`)
+    fetch(`https://pet-shop-aglr-api.vercel.app/produtos`)
       .then(resposta => {
         return resposta.json();
       })

@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { esvaziaCarrinho } from "../../store"
+
 
 function Carrinho() {
+  const dispatch = useDispatch();
 
-  // State: a counter value
-  const [counter, setCounter] = useState(0)
-
-  // Action: code that causes an update to the state when something happens
-  const increment = () => {
-    setCounter(prevCounter => prevCounter + 1)
-  }
+  const esvaziar = (event) => {
+    event.preventDefault();
+    dispatch(esvaziaCarrinho());
+  };
 
   return (
     <div>
-      Value: {counter} <button onClick={increment}>Increment</button>
+      <button className="bg-slate-300" onClick={esvaziar}>Esvaziar</button>
     </div>
   );
 }

@@ -1,12 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import ProdutosCard from './ProdutosCard';
-import store, { carrinho } from "../store"
-import { useDispatch } from "react-redux";
 
 function Vitrine() {
   const [produtos, setProdutos] = useState([]);
-  const dispatch = useDispatch();
 
   function buscaProdutos() {
     fetch(`https://pet-shop-aglr-api.vercel.app/produtos`)
@@ -23,20 +20,6 @@ function Vitrine() {
     buscaProdutos()
   }, [])
 
-  //const [produtosCarrinho, setProdutoCarrinho] = useState(pc)
-  function addToCart(id) {
-    const produtosCarrinho = store.getState().produtosCarrinho
-    let isInCart = false;
-    produtosCarrinho.forEach(el => {
-      if (id === el) {
-        isInCart = true
-      }
-    })
-    if (!isInCart) {
-      console.log("despachado")
-      dispatch(carrinho({ type: "ADD_TO_CART", payload: id }))
-    }
-  }
 
   function gerarNota() {
     return Math.floor(Math.random() * 5 + 1);
@@ -53,7 +36,7 @@ function Vitrine() {
         <div className="flex flex-wrap w-full justify-evenly">
           {
             produtos.map(item =>
-              <ProdutosCard item={item} key={item} nota={gerarNota()} function={addToCart()} />
+              <ProdutosCard item={item} key={item} nota={gerarNota()} />
             )
           }
         </div>

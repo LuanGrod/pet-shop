@@ -24,16 +24,35 @@ export const usuario = createSlice({
             state.email = "";
         }, 
         carrinho: (state, { payload }) => {
-            state.produtosCarrinho = [...state.produtosCarrinho, payload.payload]
-        },
-        esvaziaCarrinho: (state) => {
-            console.log("Esvaziando carrinho")
-            state.produtosCarrinho = []
+            switch(payload.type){
+                case "ADD_TO_CART":
+                    state.produtosCarrinho = [...state.produtosCarrinho, payload.payload]
+                    console.log(state.produtosCarrinho)
+                    break
+
+                case "REMOVE_FROM_CART":
+                    state.produtosCarrinho = state.produtosCarrinho.filter((el) => el !== payload.payload)
+                    break
+
+                case "EXCLUDE_ALL_CART":
+                    state.produtosCarrinho = []
+                    break
+
+                case "INCREMENT_PRODUCT":
+                    break
+
+                case "DECREMENT_PRODUCT":
+                    break
+
+                default:
+                    return state
+            }
+
         }
     }
 })
 
-export const { entrar, sair, carrinho, esvaziaCarrinho } = usuario.actions
+export const { entrar, sair, carrinho } = usuario.actions
 
 export const Usuario = (state) => state.usuario
 export const Logado = (state) => state.logado

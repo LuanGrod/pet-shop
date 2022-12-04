@@ -11,6 +11,7 @@ exports.produtosGet = (request, response) => {
     }
     else {
         produto.consultar().then (result => {
+            //console.log(result)
             response.send(result);
         }).catch(error => {
             response.send(error)

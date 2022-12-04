@@ -13,7 +13,7 @@ function Cadastro() {
   }, [logadoEstado, navigate])
 
   function postCadastro() {
-    fetch('http://localhost:6969/cadastro', {
+    fetch('https://pet-shop-aglr-api.vercel.app/cadastro', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

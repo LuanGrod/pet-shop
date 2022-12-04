@@ -1,6 +1,6 @@
 const Produto = require("../model/Produto")
 
-exports.produtosGet = (request, response) => {
+exports.produtosGetById = (request, response) => {
     const produto = new Produto();
     produto.id = request.query.id
     produto.consultarId().then (result => {
@@ -10,7 +10,7 @@ exports.produtosGet = (request, response) => {
     });
 };
 
-exports.produtosPost = (request, response) => {
+exports.produtosGet = (request, response) => {
     const produto = new Produto();
     produto.consultar().then (result => {
         response.send(result);

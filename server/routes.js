@@ -15,8 +15,8 @@ route.put("/usuario", usuarioController.usuarioPut);
 
 route.delete("/usuario", usuarioController.usuarioDelete);
 
-route.get("/produtos/:query?", produtosController.produtosGet)
+route.get("/produto/:query?", produtosController.produtosGetById)
 
-route.post("/produtos", produtosController.produtosPost)
+route.get("/produtos", produtosController.produtosGet)
 
 module.exports = route;

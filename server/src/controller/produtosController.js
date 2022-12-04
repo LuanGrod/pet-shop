@@ -1,20 +1,19 @@
 const Produto = require("../model/Produto")
 
-exports.produtosGetById = (request, response) => {
-    const produto = new Produto();
-    produto.id = request.query.id
-    produto.consultarId().then (result => {
-        response.send(result);
-    }).catch(error => {
-        response.send(error)
-    });
-};
-
-exports.produtosGet = (request, response) => {
-    const produto = new Produto();
-    produto.consultar().then (result => {
-        response.send(result);
-    }).catch(error => {
-        response.send(error)
-    });
+exports.produtosGet = (request, response) => {  
+    const produto = new Produto(request.query);
+    if (!(typeof request.query.id === "undefined")){       
+        produto.consultarId().then (result => {
+            response.send(result);
+        }).catch(error => {
+            response.send(error)
+        });
+    }
+    else {
+        produto.consultar().then (result => {
+            response.send(result);
+        }).catch(error => {
+            response.send(error)
+        });
+    }   
 };

@@ -44,7 +44,7 @@ export function Menu() {
         <Link to="/" className="my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50">Home</Link>
         <Link to="/produtos" className="my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50 ">Produtos</Link>
         <Link to="/sobre" className="my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50 ">Sobre</Link>
-        <Link to="/carrinho" className="my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50 m-auto"><TbShoppingCart className="m-0 text-2xl" /></Link>
+        <Link to="/carrinho" className=" h-full flex my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50 m-auto "><TbShoppingCart className="m-0 text-2xl" /><p className="grid place-items-center bg-red-600 rounded-lg w-5">4</p></Link>
         <button onClick={e => setMenuToggle(!menuToggle)} className=" my-auto p-7 text-white hover:bg-brand-tertiary-opacity-50 m-auto"><TbUserCircle className="m-0 text-2xl" /></button>
         {
           menuToggle ?

@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "dev": "nodemon server.jsx",
+    "start": "node index.js",
+    "dev": "nodemon index.jsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

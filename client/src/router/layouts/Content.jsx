@@ -9,6 +9,7 @@ import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Cadastro from "../pages/Cadastro";
 import Usuario from './../pages/Usuario';
+import Produto from "../pages/Produto";
 
 export function Content() {
 
@@ -18,6 +19,7 @@ export function Content() {
         <Route path="/" exact element={<Home />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/produtos" element={<Produtos />} />
+        <Route path="/produtos/:id" element={<Produto />} />
         <Route path="/carrinho" element={<Carrinho />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />

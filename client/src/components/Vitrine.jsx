@@ -38,6 +38,10 @@ function Vitrine() {
     }
   }
 
+  function gerarNota() {
+    return Math.floor(Math.random() * 5 + 1);
+  }
+
   return (
     <aside className="flex flex-col w-9/12 ml-5 h-auto ">
       <div>
@@ -46,10 +50,10 @@ function Vitrine() {
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga ad accusamus reiciendis nemo quibusdam, soluta repellat hic sunt neque minima autem porro? Ipsum velit hic illo reprehenderit esse voluptates aut.</p>
       </div>
       <div className="mt-6 bg-brand-primary">
-        <div className="m-5 flex flex-wrap w-full justify-between gap-y-3">
+        <div className="flex flex-wrap w-full justify-evenly">
           {
             produtos.map(item =>
-              <ProdutosCard item={item} key={item} function={addToCart()} />
+              <ProdutosCard item={item} key={item} nota={gerarNota()} function={addToCart()} />
             )
           }
         </div>

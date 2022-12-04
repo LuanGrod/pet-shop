@@ -62,11 +62,11 @@ function Login() {
     <div className="flex h-screen justify-center items-center bg-blob-1 bg-cover">
       <form className="w-4/12 h-fit p-10 bg-white border rounded-2xl opacity-95" onSubmit={(e) => handleSubmit(e)}>
         <div className="mb-5">
-          <label for="usuario" className="block mb-2 text-sm font-medium text-gray-900">Usuário</label>
+          <label className="block mb-2 text-sm font-medium text-gray-900">Usuário</label>
           <input type="text" id="usuario" className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Usuário" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="mb-6">
-          <label for="senha" className="block mb-2 text-sm font-medium text-gray-900">Senha</label>
+          <label className="block mb-2 text-sm font-medium text-gray-900">Senha</label>
           <input type="password" id="senha" className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className="flex flex-col">

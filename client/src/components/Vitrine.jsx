@@ -1,36 +1,47 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import ProdutosCard from './ProdutosCard';
 
 function Vitrine() {
   const [produtos, setProdutos] = useState([]);
- 
-    function buscaProdutos() {
-      fetch(`http://localhost:6969/produtos`)
+
+  function buscaProdutos() {
+    fetch('http://localhost:6969/produtos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+      }
+    })
       .then(resposta => {
-          return resposta.json();
+        return resposta.json();
       })
       .then(resposta => {
-          const vetor = Object.values(resposta);
-          setProdutos(vetor);
+        const vetor = Object.values(resposta);
+        setProdutos(vetor);
       });
-    }
-     
-    useEffect(() => {
-      buscaProdutos() 
-    }, [])
+  }
+
+  useEffect(() => {
+    buscaProdutos()
+  }, [])
 
   return (
-    <aside className="flex flex-wrap justify-between w-3/5 h-auto ml-5 bg-brand-primary">
-      {    
-      produtos.map(item => 
-          <div key={item} className="m-4 p-3">
-            <img id="imagem" src={item[2]} alt="produto" className="w-20 h-20"/>
-            <h1 id="descricao">{item[0]}</h1> 
-            <h1 id="preco" className="text-2xl">{item[1]}</h1>
-            <button className="bg-slate-300">Adicionar ao carrinho</button>
-          </div>
-          )
-      }
+    <aside className="flex flex-col w-9/12 ml-5 h-auto ">
+      <div>
+        <h2 className="font-black text-2xl tracking-wider text-brand-dark">Produtos</h2>
+        <p className="pt-3">Nossos produtos são bons, confia :D</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga ad accusamus reiciendis nemo quibusdam, soluta repellat hic sunt neque minima autem porro? Ipsum velit hic illo reprehenderit esse voluptates aut.</p>
+      </div>
+      <div className="mt-6 bg-brand-primary">
+        <div className="m-5 flex flex-wrap w-full justify-between gap-y-3">
+          {
+            produtos.map(item =>
+              <ProdutosCard item={item} key={item} />
+            )
+          }
+        </div>
+      </div>
     </aside>
   );
 }

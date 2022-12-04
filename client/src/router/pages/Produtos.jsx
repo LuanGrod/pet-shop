@@ -5,7 +5,7 @@ import Vitrine from './../../components/Vitrine';
 function Produtos() {
 
   return (
-    <div className="flex w-full h-screen justify-center items-center bg-slate-200">
+    <div className="flex w-full h-fit pt-7 justify-center items-start">
       <Sidebar />
       <Vitrine />
     </div>

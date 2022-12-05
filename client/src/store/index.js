@@ -27,11 +27,10 @@ export const usuario = createSlice({
             switch(payload.type){
                 case "ADD_TO_CART":
                     state.produtosCarrinho = [...state.produtosCarrinho, payload.payload]
-                    console.log(state.produtosCarrinho)
                     break
 
                 case "REMOVE_FROM_CART":
-                    state.produtosCarrinho = state.produtosCarrinho.filter((el) => el !== payload.payload)
+                    state.produtosCarrinho = state.produtosCarrinho.filter((el) => el[0] !== payload.payload)
                     break
 
                 case "EXCLUDE_ALL_CART":
@@ -39,9 +38,21 @@ export const usuario = createSlice({
                     break
 
                 case "INCREMENT_PRODUCT":
+                    state.produtosCarrinho = state.produtosCarrinho.map((item) => {
+                        if(item[0] === payload.payload){
+                            item[4] ++
+                        }
+                        return item
+                    })
                     break
 
                 case "DECREMENT_PRODUCT":
+                    state.produtosCarrinho = state.produtosCarrinho.map((item) => {
+                        if(item[0] === payload.payload){
+                            item[4] --
+                        }
+                        return item
+                    })
                     break
 
                 default:

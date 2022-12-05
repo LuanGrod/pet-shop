@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { sair } from '../../store';
-import store from '../../store';
+import { sair } from "../../store";
+import store from "../../store";
 
 export function Usuario() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [usuario, setUsuario] = useState();
-  const [email, setEmail] = useState()
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState(); //senha atual
+  const [newpassword, setNewPassword] = useState(); //senha nova
   const logadoEstado = store.getState().logado;
+  const [deleteToggle, setDeleteToggle] = useState(false);
+  const [erro, setErro] = useState("");
 
   useEffect(() => {
     if (!logadoEstado) {
-      navigate('/login');
+      navigate("/login");
     } else {
       setUsuario(store.getState().usuario);
       setEmail(store.getState().email);
@@ -24,26 +27,151 @@ export function Usuario() {
   const desconectar = (event) => {
     event.preventDefault();
     dispatch(sair());
-    navigate('/');
+    navigate("/");
   };
 
-  return (
-   <div className="w-screen h-screen bg-slate-200">
-    <div className="flex flex-col justify-center items-center">
-      <div className="flex flex-col	justify-between items-center w-60 mt-20 ">
-        <h1><b>Usuário Logado</b></h1>
-        <p>Nome: {usuario}</p>
-        <p>Email: {email}</p>
-        <div className='py-6 flex justify-around w-60'>
-          <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type='button' >Excluir Conta</button>
-          <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type='button' >Editar</button>
-        </div>
-        <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-800 hover:border-red-500 rounded w-1/2" type='button' onClick={desconectar}>Sair</button>
-      </div>
+  const handleDelete = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:6969/usuario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Accept": "application/json",
+      },
+      body: new URLSearchParams({
+        username: usuario,
+        password: password,
+      }),
+    })
+      .then((resposta) => {
+        return resposta.json();
+      })
+      .then((resposta) => {
+        console.log(resposta);
+        if (resposta.username === usuario && resposta.email === email) {
+          //se retornar sucesso
+          fetch("http://localhost:6969/usuario", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              "Accept": "application/json",
+            },
+            body: new URLSearchParams({
+              username: usuario
+            }),
+          })
+            .then((resposta) => {
+              return resposta.JSON.stringify();
+            })
+            .then((resposta) => {
+              console.log(resposta);
+              if (resposta.username != usuario) {
+                setErro("Usuário inexistente!");
+              }
+            });
+        } else {
+          setErro("Senha incorreta!");
+          return false;
+        }
+      });
+  };
 
+  // const handleDelete = (d) => {
+  //   d.preventDefault();
+
+  // function postAutenticacao() {
+
+  // }
+
+  return (
+    <div className="flex flex-col h-screen justify-center items-center bg-blob-2 bg-cover">
+      <div className="w-4/12 h-fit p-10 bg-white border rounded-2xl">
+        <div className="mb-5">
+          <label className="block mb-2 text-sm font-medium text-gray-900">
+            Usuário
+          </label>
+          <input
+            type="text"
+            id="usuario"
+            className="block w-full p-2.5 bg-transparent bg-stone-400 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none"
+            readOnly
+            placeholder="Usuário"
+            value={usuario}
+            onChange={(e) => setUsuario(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-5">
+          <label className="block mb-2 text-sm font-medium text-gray-900">
+            Novo e-mail
+          </label>
+          <input
+            type="email"
+            id="email"
+            className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-6">
+          <label className="block mb-2 text-sm font-medium text-gray-900">
+            Nova Senha
+          </label>
+          <input
+            type="password"
+            id="senha"
+            className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none"
+            placeholder="Nova senha"
+            value={newpassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+        </div>
+
+        <button
+          onClick={(e) => setDeleteToggle(!deleteToggle)}
+          className="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+        >
+          Excluir conta
+        </button>
+
+        <button className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full">
+          Alterar dados
+        </button>
+      </div>
+      {deleteToggle ? (
+        <form
+          className="w-4/12 h-fit p-10 bg-white border rounded-2xl "
+          onSubmit={(e) => handleDelete(e)}
+        >
+          <div className="h-fit">
+            <label>Confirme sua senha atual</label>
+            <input
+              className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none"
+              type="text"
+              id="password"
+              placeholder="Senha atual..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              className="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+              type="submit"
+            >
+              Confirmar exclusão
+            </button>
+            <p className="text-red-700 p-3">{erro}</p>
+          </div>
+        </form>
+      ) : (
+        ""
+      )}
     </div>
-   </div> 
-  )
+  );
 }
 
 export default Usuario;
+
+{
+}

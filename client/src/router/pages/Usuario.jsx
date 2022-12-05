@@ -28,19 +28,21 @@ export function Usuario() {
   };
 
   return (
+   <div className="w-screen h-screen bg-slate-200">
     <div className="flex flex-col justify-center items-center">
       <div className="flex flex-col	justify-between items-center w-60 mt-20 ">
         <h1><b>Usuário Logado</b></h1>
         <p>Nome: {usuario}</p>
         <p>Email: {email}</p>
         <div className='py-6 flex justify-around w-60'>
-          <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type='button' >Excluir</button>
+          <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type='button' >Excluir Conta</button>
           <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type='button' >Editar</button>
         </div>
         <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-800 hover:border-red-500 rounded w-1/2" type='button' onClick={desconectar}>Sair</button>
       </div>
 
     </div>
+   </div> 
   )
 }
 

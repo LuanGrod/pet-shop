@@ -57,14 +57,14 @@ export function Menu() {
                 {
                   autenticado ?
                     <>
-                      <Link to="/usuario" className="py-4 rounded-lg bg-green-400 text-white text-center text-lg font-bold tracking-widest ">Perfil</Link>
+                      <Link to="/usuario" className="py-4 rounded-lg bg-green-400 text-white text-center text-lg font-bold tracking-widest" onClick={e => setMenuToggle(!menuToggle)}>Perfil</Link>
                       <hr className="w-auto border-gray-400" />
                       <button className="py-1 rounded-lg bg-red-400 text-white text-center text-base font-bold tracking-widest" type='button' onClick={desconectar}>Sair</button>
                     </>
                     :
                     <>
-                      <Link to="/login" className="my-auto py-4 rounded-lg bg-green-400 text-white text-center text-lg font-bold tracking-widest">Entrar</Link>
-                      <span>Não tem conta? <Link to="/cadastro" className="text-blue-600">Cadastre-se</Link></span>
+                      <Link to="/login" className="my-auto py-4 rounded-lg bg-green-400 text-white text-center text-lg font-bold tracking-widest" onClick={e => setMenuToggle(!menuToggle)}>Entrar</Link>
+                      <span>Não tem conta? <Link to="/cadastro" className="text-blue-600" onClick={e => setMenuToggle(!menuToggle)}>Cadastre-se</Link></span>
                     </>
                 }
               </div>

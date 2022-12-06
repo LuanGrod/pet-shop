@@ -15,20 +15,19 @@ function ProdutosCard(props) {
     nota.splice(i, 1, <AiFillStar key={i} />);
   }
     //const [produtosCarrinho, setProdutoCarrinho] = useState(pc)
-    function addToCart(id) {
+    function addToCart(item) {
       const produtosCarrinho = store.getState().produtosCarrinho
-      //console.log(produtosCarrinho)
       let isInCart = false;
         produtosCarrinho.forEach(el => {
-          if (id === el) {
+          if (item[0] === el[0]) {
             isInCart = true
           }
         })
       
       
       if (!isInCart) {
-        //console.log("despachado")
-        dispatch(carrinho({type: "ADD_TO_CART", payload: id}))
+        const it = [...item, 1]
+        dispatch(carrinho({type: "ADD_TO_CART", payload: it}))
       }
     }
 
@@ -52,7 +51,7 @@ function ProdutosCard(props) {
           </div>
 
           <div className="flex flex-row-reverse justify-between">
-            <button type="button" className="px-4 py-2 mr-2 text-xs text-center font-semibold rounded-lg flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-[3px]" onClick={() => addToCart(props.item[0])}>
+            <button type="button" className="px-4 py-2 mr-2 text-xs text-center font-semibold rounded-lg flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-[3px]" onClick={() => addToCart(props.item)}>
               <TbShoppingCart className="mr-3 text-lg" />
               Adicionar
             </button>

@@ -11,6 +11,8 @@
 * Tudo que achar pertinente pode por aqui
 * Sempre que for trabalhar nisso tenta dar um `git pull` antes de começar e quando der um `git push` da um toque no grupo pra nao precisar ficar usando um milhão de branchs diferentes
 
+![github](https://github.com/LuanGrod/pet-shop/blob/main/assets/diag.png)
+
 ## Tutorial básico para a instalação e configuração do ambiente de desenvolvimento
 
 ### Instalando o projeto em sua máquina

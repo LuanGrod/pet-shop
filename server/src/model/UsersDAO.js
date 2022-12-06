@@ -188,6 +188,7 @@ class UsersDAO {
                     delete dados[username];
                     UsersDAO.save(dados).then(() => {
                         const resposta = JSON.stringify("Usuário removido com sucesso!")
+                        console.log(resposta)
                         resolve(resposta)
                     }).catch(error => {
                         const resposta = JSON.stringify("Não foi possível salvar os dados: " + error)

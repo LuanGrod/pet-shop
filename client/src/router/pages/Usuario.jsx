@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { sair } from '../../store';
+import { refreshUsuario, sair } from '../../store';
 import store from '../../store';
 
 export function Usuario() {
@@ -9,7 +9,13 @@ export function Usuario() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [usuario, setUsuario] = useState();
-  const [email, setEmail] = useState()
+  const [email, setEmail] = useState();
+  const [newPassword, setNewPassword] = useState();
+  const [password, setPassword] = useState();
+  const [deleteToggle, setDeleteToggle] = useState(false);
+  const [updateToggle, setUpdateToggle] = useState(false);
+  const [validado, setValidado] = useState(false);
+  const [erro, setErro] = useState("");
   const logadoEstado = store.getState().logado;
 
   useEffect(() => {
@@ -21,28 +27,155 @@ export function Usuario() {
     }
   }, [logadoEstado, navigate]);
 
-  const desconectar = (event) => {
-    event.preventDefault();
+  const desconectar = () => {
     dispatch(sair());
     navigate('/');
   };
 
-  return (
-   <div className="w-screen h-screen bg-slate-200">
-    <div className="flex flex-col justify-center items-center">
-      <div className="flex flex-col	justify-between items-center w-60 mt-20 ">
-        <h1><b>Usuário Logado</b></h1>
-        <p>Nome: {usuario}</p>
-        <p>Email: {email}</p>
-        <div className='py-6 flex justify-around w-60'>
-          <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type='button' >Excluir Conta</button>
-          <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type='button' >Editar</button>
-        </div>
-        <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-800 hover:border-red-500 rounded w-1/2" type='button' onClick={desconectar}>Sair</button>
-      </div>
+  //Verifica se a senha está correta para alterações.
+  const autenticacaoPost = () => {
+    fetch('http://localhost:6969/usuario', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+      },
+      body: new URLSearchParams({
+        username: usuario,
+        password: password,
+      })
+    })
+      .then(resposta => {
+        return resposta.json();
+      })
+      .then(resposta => {
+        if (resposta.username === usuario && resposta.email === email) { //se retornar sucesso
+          setValidado(true);
+          setErro("");
+        }
+        else{
+          setErro("Senha incorreta!");
+        }
+      });
+  }
 
+  //Realiza a deleção.
+  const deleteDelete = (e) => {
+    e.preventDefault();
+    autenticacaoPost();
+    if(validado){
+      fetch('http://localhost:6969/usuario', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+      },
+      body: new URLSearchParams({
+        username: usuario
+      })
+    })
+      .then(resposta => {
+        return resposta.json();
+      })
+      .then(resposta => {
+        if (resposta === "Usuário removido com sucesso!") { //se retornar sucesso
+          alert(resposta);
+          desconectar();
+        }
+        else{
+          setErro("Não foi possível realizar a exclusão!");
+        }
+      });
+    }
+  }
+
+    //Realiza a atualização.
+    const updatePut = (e) => {
+      e.preventDefault();
+      autenticacaoPost();
+      if(validado){
+        fetch('http://localhost:6969/usuario', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json'
+        },
+        body: new URLSearchParams({
+          username: usuario,
+          email: email,
+          password: newPassword,
+        })
+      })
+        .then(resposta => {
+          return resposta.json();
+        })
+        .then(resposta => {
+          if (resposta === "Usuário atualizado com sucesso!") { //se retornar sucesso
+            alert(resposta)
+            setNewPassword("");
+            setPassword("");
+            setUpdateToggle(false);
+            dispatch(refreshUsuario({payload: email}))
+          }
+          else{
+            setErro(resposta);
+          }
+        });
+      }
+    }
+
+  return (
+    <div className="flex flex-col h-screen justify-center items-center">
+      <div className="w-4/12 h-fit p-10 bg-white border rounded-2xl">
+        <h1 className="text-3xl">Bem vindo, {usuario}!</h1>
+      </div>
+      <div className="w-4/12 h-fit p-10 bg-white border rounded-2xl" >
+        <h1 className="text-2xl mb-2">Editar dados:</h1>
+        <div className="mb-5">
+          <label className="block mb-2 text-sm font-medium text-gray-900">Usuário</label>
+          <input type="text" readOnly id="usuario" className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Usuario" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
+        </div>
+
+        <div className="mb-5">
+          <label className="block mb-2 text-sm font-medium text-gray-900">E-mail</label>
+          <input type="email" id="email" className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+
+        <div className="mb-6">
+          <label className="block mb-2 text-sm font-medium text-gray-900">Nova Senha</label>
+          <input type="password" id="senha" className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Senha" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+        </div>
+
+        <button className="mr-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={e => setUpdateToggle(!updateToggle)}>Confirmar alterações</button>
+        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" onClick={e => setDeleteToggle(!deleteToggle)}>Excluir conta</button>
+      </div>
+      {
+        deleteToggle ? (
+          <div className="w-4/12 h-fit p-10 bg-white border rounded-2xl">
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-900">Confirme sua Senha:</label>
+              <input type="password" id="senha" className="mb-6 block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <button className="mb-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" onClick={e => deleteDelete(e)}>Excluir</button>
+              <p className="text-red-700">{erro}</p>
+            </div>
+          </div>
+        )
+          : ""
+      }
+      {
+        updateToggle ? (
+          <div className="w-4/12 h-fit p-10 bg-white border rounded-2xl">
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-900">Confirme sua Senha:</label>
+              <input type="password" id="senha" className="mb-6 block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <button className="mb-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={e => updatePut(e)}>Salvar</button>
+              <p className="text-red-700">{erro}</p>
+            </div>
+          </div>
+        )
+          : ""
+      }
     </div>
-   </div> 
   )
 }
 

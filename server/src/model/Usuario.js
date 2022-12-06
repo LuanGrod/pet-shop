@@ -37,7 +37,7 @@ class Usuario {
     autenticar() {
         const promise = (resolve, reject) => {
             if ((this.#username == "") || (this.#password == "") || 
-            (typeof this.#username === "undefined") || (typeof this.#password === "undefined")){
+            (this.#username === "undefined") || (this.#password === "undefined")){
                 const resposta = JSON.stringify("Erro! Não podem existir dados em branco.")
                 reject(resposta)
             }
@@ -60,7 +60,7 @@ class Usuario {
     cadastrar() {
         const promise = (resolve, reject) => {
             if ((this.#username == "") || (this.#email == "") || (this.#password == "") 
-            || (typeof this.#username === "undefined") || (typeof this.#email === "undefined") || (typeof this.#password === "undefined")){
+            || (this.#username === "undefined") || (this.#email === "undefined") || (this.#password === "undefined")){
                 const resposta = JSON.stringify("Erro! Não podem existir dados em branco.")
                 reject(resposta)
             }
@@ -85,7 +85,7 @@ class Usuario {
     atualizar() {
         const promise = (resolve, reject) => {
             if ((this.#username == "") || (this.#email == "") || (this.#password == "") 
-            || (typeof this.#username === "undefined") || (typeof this.#email === "undefined") || (typeof this.#password === "undefined")){
+            || (this.#username === "undefined") || (this.#email === "undefined") || (this.#password === "undefined")){
                 const resposta = JSON.stringify("Erro! Não podem existir dados em branco.")
                 reject(resposta)
             }
@@ -107,7 +107,7 @@ class Usuario {
      */
     remover() {
         const promise = (resolve, reject) => {
-            if ((this.#username == "") || (typeof this.#username === "undefined")) {
+            if ((this.#username == "") || (this.#username === "undefined")) {
                 const resposta = JSON.stringify("Erro! Não podem existir dados em branco.")
                 reject(resposta)
             }

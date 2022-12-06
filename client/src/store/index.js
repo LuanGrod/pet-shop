@@ -18,6 +18,9 @@ export const usuario = createSlice({
             state.carrinho = payload.carrinho
             //console.log(state.logado)
         },
+        refreshUsuario: (state, {payload}) => {
+            state.email = payload.payload
+        },
         sair: (state) => {
             state.logado = !state.logado;
             state.usuario = "";
@@ -63,7 +66,7 @@ export const usuario = createSlice({
     }
 })
 
-export const { entrar, sair, carrinho } = usuario.actions
+export const { entrar, refreshUsuario, sair, carrinho } = usuario.actions
 
 export const Usuario = (state) => state.usuario
 export const Logado = (state) => state.logado

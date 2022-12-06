@@ -5,22 +5,21 @@ import { refreshUsuario, sair } from '../../store';
 import store from '../../store';
 
 export function Usuario() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [usuario, setUsuario] = useState();
   const [email, setEmail] = useState();
   const [newPassword, setNewPassword] = useState();
   const [password, setPassword] = useState();
+  const [validado, setValidado] = useState(false);
+  const logadoEstado = store.getState().logado;
   const [deleteToggle, setDeleteToggle] = useState(false);
   const [updateToggle, setUpdateToggle] = useState(false);
-  const [validado, setValidado] = useState(false);
   const [erro, setErro] = useState("");
-  const logadoEstado = store.getState().logado;
 
   useEffect(() => {
     if (!logadoEstado) {
-      navigate('/login');
+      navigate("/login");
     } else {
       setUsuario(store.getState().usuario);
       setEmail(store.getState().email);
@@ -29,7 +28,7 @@ export function Usuario() {
 
   const desconectar = () => {
     dispatch(sair());
-    navigate('/');
+    navigate("/");
   };
 
   //Verifica se a senha está correta para alterações.
@@ -180,3 +179,6 @@ export function Usuario() {
 }
 
 export default Usuario;
+
+{
+}

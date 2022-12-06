@@ -1,15 +1,14 @@
 # Pet Shop - Tudo para o seu pet
-[![status](https://img.shields.io/badge/status-indo...-green)](https://github.com/LuanGrod/pet-shop)
+[![status](https://img.shields.io/badge/status-completo-green)](https://github.com/LuanGrod/pet-shop)
 [![licence](https://img.shields.io/badge/licença-MIT-red)](https://github.com/LuanGrod/pet-shop/blob/main/LICENSE)
 
 ## Sobre o projeto
-~Depois a gente faz isso~
-* Objetivo
-* Caracteristicas
-* Falar sobre o MVC
-* Orientação a objetos
-* Tudo que achar pertinente pode por aqui
-* Sempre que for trabalhar nisso tenta dar um `git pull` antes de começar e quando der um `git push` da um toque no grupo pra nao precisar ficar usando um milhão de branchs diferentes
+
+Este site é um projeto desenvolvido por alunos do Instituto Federal de Educação, Ciência e Tecnologia de São Paulo - Campus São Paulo, no quarto período do curso de Tecnologia em Análise e Desenvolvimento de Sistemas, para a discplina de Desenvolvimento Web 2.
+
+O objeto é consolidar o conhecimento adquirido durante o semestre.
+
+### Diagrama do site
 
 ![github](https://github.com/LuanGrod/pet-shop/blob/main/assets/diag.png)
 
@@ -84,8 +83,6 @@ server ->
 No próprio VScode, basta abrir dois terminais em paralelo e digitar o script `npm start` em cada pasta, rodando assim as aplicações.
 
 ![github](https://github.com/LuanGrod/pet-shop/blob/main/assets/ss3.JPG)
-
-### ~Por enquanto é isso, conforme a gente for fazendo isso vamos atualizando esse README.md~
 
 # Ferramentas e Tecnologias
 ### Front-end

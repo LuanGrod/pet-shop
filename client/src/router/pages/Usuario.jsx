@@ -13,6 +13,7 @@ export function Usuario() {
   const [newpassword, setNewPassword] = useState(); //senha nova
   const logadoEstado = store.getState().logado;
   const [deleteToggle, setDeleteToggle] = useState(false);
+  const [updateToggle, setUpdateToggle] = useState(false);
   const [erro, setErro] = useState("");
 
   useEffect(() => {
@@ -30,7 +31,59 @@ export function Usuario() {
     navigate("/");
   };
 
+    // Função de deleção da conta
+
   const handleDelete = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:6969/usuario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Accept": "application/json",
+      },
+      body: new URLSearchParams({
+        username: usuario,
+        password: password,
+      }),
+    })
+      .then((resposta) => {
+        return resposta.json();
+        
+      })
+      .then((resposta) => {
+        console.log(resposta);
+        if (resposta.username === usuario && resposta.email === email) {
+          //se retornar sucesso
+          fetch("http://localhost:6969/usuario", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              "Accept": "application/json",
+            },
+            body: new URLSearchParams({
+              username: usuario
+            }),
+          })
+            .then((resposta) => {
+              return resposta.JSON.stringify();
+              
+            })
+            .then((resposta) => {
+              console.log(resposta);
+              if (resposta.username != usuario) {
+                setErro("Usuário inexistente!");
+              }
+            });
+        } else {
+          setErro("Senha incorreta!");
+          return false;
+        }
+      });
+  };
+
+  // Função de atualização dos dados
+
+  const handleUpdate = (e) => {
     e.preventDefault();
     fetch("http://localhost:6969/usuario", {
       method: "POST",
@@ -51,13 +104,15 @@ export function Usuario() {
         if (resposta.username === usuario && resposta.email === email) {
           //se retornar sucesso
           fetch("http://localhost:6969/usuario", {
-            method: "DELETE",
+            method: "PATCH",
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
               "Accept": "application/json",
             },
             body: new URLSearchParams({
-              username: usuario
+              username: usuario,
+              email: email,
+              password: newpassword,
             }),
           })
             .then((resposta) => {
@@ -75,13 +130,6 @@ export function Usuario() {
         }
       });
   };
-
-  // const handleDelete = (d) => {
-  //   d.preventDefault();
-
-  // function postAutenticacao() {
-
-  // }
 
   return (
     <div className="flex flex-col h-screen justify-center items-center bg-blob-2 bg-cover">
@@ -136,10 +184,46 @@ export function Usuario() {
           Excluir conta
         </button>
 
-        <button className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full">
+        <button 
+        onClick={(e) => setUpdateToggle(!updateToggle)}
+        className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full">
           Alterar dados
         </button>
       </div>
+
+      {updateToggle ? (
+        <form
+          className="w-4/12 h-fit p-10 bg-white border rounded-2xl "
+          onSubmit={(e) => handleUpdate(e)}
+        >
+          <div className="h-fit">
+            <label>Confirme sua senha atual</label>
+            <input
+              className="block w-full p-2.5 bg-slate-50 border border-slate-400 text-sm rounded-lg focus:ring-1 focus:outline-none"
+              type="text"
+              id="password"
+              placeholder="Senha atual..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              className="mt-2 bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
+              type="submit"
+            >
+              Confirmar alteração de dados
+            </button>
+            <p className="text-red-700 p-3">{erro}</p>
+          </div>
+        </form>
+      ) : (
+        ""
+      )}
+
+
+
+
+
+
       {deleteToggle ? (
         <form
           className="w-4/12 h-fit p-10 bg-white border rounded-2xl "
@@ -167,6 +251,9 @@ export function Usuario() {
       ) : (
         ""
       )}
+
+
+
     </div>
   );
 }
